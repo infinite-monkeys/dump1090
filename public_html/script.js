@@ -775,6 +775,8 @@ function refreshSelected() {
                 $('#selected_callsign').text('n/a');
         }
         $('#selected_flightaware_link').html(getFlightAwareModeSLink(selected.icao, selected.flight, "[FlightAware]"));
+        $('#selected_fr24_link').html(getFR24Link(selected.icao, selected.flight, "[FR24]"));
+        $('#selected_flightstats_link').html(getFlightStatsLink(selected.icao, selected.flight, "[FlightStats]"));
 
         if (selected.registration !== null) {
                 $('#selected_registration').text(selected.registration);
@@ -1357,6 +1359,22 @@ function updatePlaneFilter() {
     PlaneFilter.minAltitude = minAltitude;
     PlaneFilter.maxAltitude = maxAltitude;
     PlaneFilter.altitudeUnits = DisplayUnits;
+}
+
+function getFR24Link(code, ident, linkText) {
+    if (ident !== null && ident !== "") {
+        linkText = linkText || ident;
+        return '<a target="_blank" href="http://fr24.com/' + ident.trim() + '">' + linkText + '</a>';
+    }
+    return "";
+}
+
+function getFlightStatsLink(code, ident, linkText) {
+    if (ident !== null && ident !== "") {
+        linkText = linkText || ident;
+        return '<a target="_blank" href="http://www.flightstats.com/go/FlightStatus/flightStatusByFlight.do?flightNumber=' + ident.trim() + '">' + linkText + '</a>';
+    }
+    return "";
 }
 
 function getFlightAwareIdentLink(ident, linkText) {
